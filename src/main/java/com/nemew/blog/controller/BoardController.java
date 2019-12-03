@@ -24,7 +24,7 @@ public class BoardController {
 	@ResponseBody    
 	@RequestMapping(value="/getgile/boardList.do", method = RequestMethod.GET ) // URL 주소
 	public List<BoardModel> selectBoardList() throws Throwable {
-		
+		//db연동한다
 		return boardService.BoardList();
 		//return "test2"; // JSP 파일명
 	}
