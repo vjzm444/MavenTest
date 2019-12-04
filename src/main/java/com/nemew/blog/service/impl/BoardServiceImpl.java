@@ -17,6 +17,23 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardModel> BoardList() throws Exception{
-		return dao.getBoard();
+		return dao.BoardList();
 	}
+	
+	
+
+	@Override
+	public BoardModel printBoard() {
+		BoardModel board = dao.printBoard();
+		
+		return board;
+	}
+	
+	@Override
+	public List<BoardModel> printBoardList() throws Exception{
+		return dao.BoardList();
+	}
+	
+	
+	
 }

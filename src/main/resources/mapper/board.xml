@@ -13,10 +13,19 @@
 	</resultMap>
 
 
-	<select id="getBoard" resultMap="resultGetBoard">
+	<select id="printBoard" resultMap="resultGetBoard">
 		<![CDATA[
 			select * from board
 		]]>
 	</select>
+	
+	
+	<select id="BoardList" resultMap="resultGetBoard">
+		<![CDATA[
+			select * from board
+		]]>
+	</select>
+	
+	
 
 </mapper>

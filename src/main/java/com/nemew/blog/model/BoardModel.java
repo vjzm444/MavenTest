@@ -6,10 +6,16 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("boardModel")
 public class BoardModel {
-	private int id;
-	private String title;
-	private String content;
-	private String phone;
+	
+	
+	public int id;
+	public String title;
+	public String content;
+	public String phone;
+	
+	
+	
+	
 	public int getId() {
 		return id;
 	}
