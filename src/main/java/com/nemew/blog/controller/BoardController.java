@@ -62,18 +62,22 @@ public class BoardController {
 		System.out.println("result size==== "+board.size());
 		
 		request.setAttribute("data", board);
-
 		return "list"; // JSP 파일명
 	}
 	
 	// @GetMapping으로 해야지 jsp로 감....
-	@GetMapping("/test") // tes
+	@ResponseBody    
+	@RequestMapping("/test") // tes
 	public String test(Model model) {
-		
-		String msg = "Hellow world";
-		model.addAttribute("content", msg);
-		
-		return "list"; // JSP 파일명
+		return "Hellow world"; // JSP 파일명
 	}
+	  
+	@GetMapping("/") // tes
+	public String info(Model model) {
+		//페이지이동
+		return "info"; // JSP 파일명
+	}
+	
+	
 	
 }
