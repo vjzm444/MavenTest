@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nemew.blog.dao.BoardDao;
 import com.nemew.blog.model.BoardModel;
+import com.nemew.blog.model.Search;
 import com.nemew.blog.service.BoardService;
 
 import java.io.*;
@@ -30,53 +31,57 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	
-	//ajax 버젼
+	// @GetMapping으로 해야지 jsp로 감....
 	@ResponseBody    
-	@RequestMapping(value="/getgile/boardList.do", method = RequestMethod.GET ) // URL 주소
+	@RequestMapping("/test") // test용 
+	public String test(Model model) {
+		return "Hellow World!"; // 글씨가 리턴된다
+	}
+	
+	
+	//ajax 버젼 다중건 조회
+	@ResponseBody    
+	@RequestMapping(value="/getList/boardList.do", method = RequestMethod.GET ) // URL 주소
 	public List<BoardModel> selectBoardList() throws Throwable {
-
 		return boardService.BoardList();
 	}
 	
-	
-	//단일건 조회
-	@GetMapping("/list") // URL 주소
-	public String list(Model model) {
 
-		BoardModel board = boardService.printBoard();
-		
-		model.addAttribute("id", board.getId());
-		model.addAttribute("subject", board.getTitle());
-		model.addAttribute("content", board.getContent());
-		model.addAttribute("regDate", board.getPhone());
-		
-		return "list"; // JSP 파일명
-	}
-
-	 //다중건 조회
-	@GetMapping("/list2")// URL 주소
-	public String list2(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+	 //다중건 조회 jstl로 리스트 출력
+	@GetMapping("/")// URL 주소
+	public String main(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
 		List<BoardModel> board = boardService.printBoardList();
 		System.out.println("result size==== "+board.size());
 		
 		request.setAttribute("data", board);
-		return "list"; // JSP 파일명
+		//return "list"; //이건테스트용 
+		return "info"; 
 	}
 	
-	// @GetMapping으로 해야지 jsp로 감....
-	@ResponseBody    
-	@RequestMapping("/test") // tes
-	public String test(Model model) {
-		return "Hellow world"; // JSP 파일명
+	
+	 //게시물 상세 1건 정보조회
+	@GetMapping("/post.do")// URL 주소
+	public String post(HttpServletRequest request, HttpServletResponse response, Model model) throws Throwable {
+		
+		String id       = request.getParameter("id");   
+		System.out.println("id는 ==== "+id);
+		
+		Search search = new Search();
+		search.setKeyword(id);
+		
+		BoardModel board = boardService.boardDatail(search);
+		
+		model.addAttribute("id", board.getId());
+		model.addAttribute("title", board.getTitle());
+		model.addAttribute("content", board.getContent());
+		model.addAttribute("phone", board.getPhone());
+		model.addAttribute("regDate", board.getReg_date());
+		
+		return "post"; 
 	}
-	  
-	@GetMapping("/") // tes
-	public String info(Model model) {
-		//페이지이동
-		return "info"; // JSP 파일명
-	}
+	
+	
 	
 	
 	

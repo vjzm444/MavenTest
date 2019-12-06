@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
 <!DOCTYPE html>
 <html>
+
 <head>
 
   <meta charset="utf-8">
@@ -12,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SongHJ Blog - main Theme</title>
+  <title>SongHJ Blog - Post Theme</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,74 +30,63 @@
 
   <!-- Navigation -->
   <%@ include file="/WEB-INF/views/common/navigation.jsp" %>
+  
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('img/post-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>HyeonJoo Blog</h1>
-            <span class="subheading">Welcome! HyeonJoo Blog</span>
+          <div class="post-heading">
+            <h1>${title}</h1>
+            <h2 class="subheading">Phone : ${phone}</h2>
+            <span class="meta">Posted by
+              <a href="#">SongHJ</a>
+              on ${regDate}</span>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
         
-        
-        <c:forEach var="list" items="${data}">
-        
-        <div class="post-preview">
-          <a href="javascript:click(${list.id});">
-            <h2 class="post-title">
-             ${list.title}
-            </h2>
+          <h2 class="section-heading">${title}</h2>
+
+          <p>${content}</p>
+
+          <a href="#">
+            <img class="img-fluid" src="img/post-sample-image.jpg" alt="">
           </a>
-          <p class="post-meta">Posted by
-            <a href="#">SongHJ</a>
-            on ${list.reg_date}</p>
-        </div>
-        <hr>
-         </c:forEach>
-        
-        
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <span class="caption text-muted">이것은 상단 사진의 설명란입니다.</span>
+
+          <p>${content}</p>
+          
+          <p>Placeholder text by
+            <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
+            <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
         </div>
       </div>
     </div>
-  </div>
+  </article>
 
   <hr>
 
   <!-- Footer -->
-  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-  
+ <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
 
-
-<script>
-
-function click(id){
-	location.href ="post.do?id="+id;
-	
-}
-
-</script>
 </body>
 
 </html>

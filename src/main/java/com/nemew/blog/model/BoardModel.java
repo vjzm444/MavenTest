@@ -12,6 +12,7 @@ public class BoardModel {
 	public String title;
 	public String content;
 	public String phone;
+	public Date reg_date;
 	
 	
 	
@@ -39,6 +40,12 @@ public class BoardModel {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
 
 	

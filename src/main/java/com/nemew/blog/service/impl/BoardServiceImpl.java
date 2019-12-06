@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nemew.blog.dao.BoardDao;
 import com.nemew.blog.model.BoardModel;
+import com.nemew.blog.model.Search;
 import com.nemew.blog.service.BoardService;
 
 
@@ -15,24 +16,25 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired BoardDao dao;
 	
+	//ajax버젼 다중건 조회
 	@Override
 	public List<BoardModel> BoardList() throws Exception{
 		return dao.BoardList();
 	}
 	
-	
-
-	@Override
-	public BoardModel printBoard() {
-		BoardModel board = dao.printBoard();
-		
-		return board;
-	}
-	
+	//다중건 조회
 	@Override
 	public List<BoardModel> printBoardList() throws Exception{
 		return dao.BoardList();
 	}
+	
+	//상세게시물 1건
+	@Override
+	public BoardModel boardDatail(Search search) throws Exception {
+		BoardModel board = dao.boardDatail(search);
+		return board;
+	}
+
 	
 	
 	

@@ -10,21 +10,19 @@
 		<result property="title" column="TITLE" />
 		<result property="content" column="CONTENT" />
 		<result property="phone" column="PHONE" />
+		<result property="reg_date" column="REG_DATE" />
 	</resultMap>
 
-
-	<select id="printBoard" resultMap="resultGetBoard">
-		<![CDATA[
-			select * from board
-		]]>
-	</select>
-	
-	
 	<select id="BoardList" resultMap="resultGetBoard">
 		<![CDATA[
 			select * from board
 		]]>
 	</select>
+	
+	<select id="boardDatail" resultType="com.nemew.blog.model.BoardModel">
+			select * from board where id = #{keyword}
+	</select>
+	
 	
 	
 
