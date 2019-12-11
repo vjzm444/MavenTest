@@ -1,5 +1,12 @@
 package com.nemew.blog.config;
-
+/**
+ * @FileName : DataAccessConfig.java
+ * @Project : MavenTest
+ * @Date : 2019. 12. 10. 
+ * @작성자 : 송현주
+ * @변경이력 :
+ * @프로그램 설명 :
+ */
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = "com.nemew.blog.dao")
+@MapperScan(basePackages = "com.nemew.blog.post.dao")
 public class DataAccessConfig {
 
     @Bean

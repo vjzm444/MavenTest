@@ -16,7 +16,7 @@
 	
 	
 	
-	<groupId>com.nemew</groupId>
+	<groupId>com.nemew.blog</groupId>
 	<artifactId>MavenTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
   	<packaging>war</packaging>

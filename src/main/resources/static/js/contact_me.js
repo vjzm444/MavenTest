@@ -19,13 +19,29 @@ $(function() {
       }
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+
+      
+      
+    var name = document.contactForm.name.value;
+    var phone = document.contactForm.phone.value;
+    var title = document.contactForm.title.value;
+    var message = document.contactForm.message.value;
+    
+  	console.log("name value check = "+name);
+  	console.log("phone value check = "+phone);
+  	console.log("title value check = "+title);
+  	console.log("message value check = "+message);
+  
+      
+      //submit시 하는거
       $.ajax({
-        url: "././mail/contact_me.php",
+        url: "/uploadProcess.do",
+        dataType: 'json',
         type: "POST",
         data: {
           name: name,
           phone: phone,
-          email: email,
+          title: title,
           message: message
         },
         cache: false,
@@ -35,7 +51,7 @@ $(function() {
           $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
             .append("</button>");
           $('#success > .alert-success')
-            .append("<strong>Your message has been sent. </strong>");
+            .append("<strong>글 등록에 성공하였습니다. </strong>");
           $('#success > .alert-success')
             .append('</div>');
           //clear all fields

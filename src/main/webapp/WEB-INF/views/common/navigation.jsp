@@ -23,7 +23,7 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.do">게시판</a>
+            <a class="nav-link" href="list.do">게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact</a>
@@ -32,5 +32,6 @@
       </div>
     </div>
   </nav>
+  
 </body>
 </html>

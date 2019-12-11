@@ -8,7 +8,7 @@
 //ajax 버젼
 $(function() {
 	$.ajax({
-		url : '/getgile/boardList.do',
+		url : '/getList/boardList.do',
 		type: 'GET',
 		//data : params,
 		success : function(result) {
@@ -18,6 +18,7 @@ $(function() {
 				console.log(result[i].title);
 				console.log(result[i].content);
 				console.log(result[i].phone);
+				console.log(result[i].regdate);
 			}
 
 		},

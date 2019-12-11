@@ -1,5 +1,12 @@
-package com.nemew.blog.model;
-
+package com.nemew.blog.post.model;
+/**
+ * @FileName : BoardModel.java
+ * @Project : MavenTest
+ * @Date : 2019. 12. 10. 
+ * @작성자 : 송현주
+ * @변경이력 :
+ * @프로그램 설명 :
+ */
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -7,15 +14,11 @@ import org.apache.ibatis.type.Alias;
 @Alias("boardModel")
 public class BoardModel {
 	
-	
 	public int id;
 	public String title;
 	public String content;
 	public String phone;
-	public Date reg_date;
-	
-	
-	
+	public String reg_date;
 	
 	public int getId() {
 		return id;
@@ -41,10 +44,10 @@ public class BoardModel {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 

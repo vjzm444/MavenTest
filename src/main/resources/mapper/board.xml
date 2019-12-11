@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nemew.blog.dao.BoardDao">
+<mapper namespace="com.nemew.blog.post.dao.BoardDao">
 
 
-	<resultMap id="resultGetBoard" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="resultGetBoard" type="com.nemew.blog.post.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="title" column="TITLE" />
 		<result property="content" column="CONTENT" />
@@ -14,14 +14,38 @@
 	</resultMap>
 
 	<select id="BoardList" resultMap="resultGetBoard">
-		<![CDATA[
-			select * from board
-		]]>
+		SELECT AA.* FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY id ) num, a.* FROM board A  
+		)AA 
+		order by reg_date desc
+			<if test="keyword != null and keyword != '' ">
+				<![CDATA[ Limit 3 ]]>
+			</if>
+		
 	</select>
 	
-	<select id="boardDatail" resultType="com.nemew.blog.model.BoardModel">
-			select * from board where id = #{keyword}
+	<select id="boardDatail" resultType="com.nemew.blog.post.model.BoardModel">
+			select * from board 
+			where id = #{keyword}
 	</select>
+	
+	<select id="maxIdNum" resultType="int">
+			select max(id)+1 as topnum from board
+	</select>
+	
+	
+	<insert id ="boardInsertPost">
+		insert into board (
+		id,title,content,phone,reg_date
+		) value (
+			#{id},
+			#{title},
+			#{content},
+			#{phone},
+			#{reg_date}
+		)
+	</insert>
+	
 	
 	
 	
