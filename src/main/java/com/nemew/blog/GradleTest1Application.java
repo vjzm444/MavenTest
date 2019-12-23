@@ -1,12 +1,5 @@
 package com.nemew.blog;
-/**
- * @FileName : GradleTest1Application.java
- * @Project : MavenTest
- * @Date : 2019. 12. 10. 
- * @작성자 : 송현주
- * @변경이력 :
- * @프로그램 설명 :
- */
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GradleTest1Application {
 
 	public static void main(String[] args) {
+		System.out.println("start~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!");
 		SpringApplication.run(GradleTest1Application.class, args);
 	}
 

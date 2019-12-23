@@ -1,12 +1,5 @@
 package com.nemew.blog.post.dao;
-/**
- * @FileName : BoardDao.java
- * @Project : MavenTest
- * @Date : 2019. 12. 10. 
- * @작성자 : 송현주
- * @변경이력 :
- * @프로그램 설명 :
- */
+
 import java.util.List;
 
 import com.nemew.blog.post.model.BoardModel;

@@ -1,12 +1,5 @@
 package com.nemew.blog.post.service.impl;
-/**
- * @FileName : BoardServiceImpl.java
- * @Project : MavenTest
- * @Date : 2019. 12. 10. 
- * @작성자 : 송현주
- * @변경이력 :
- * @프로그램 설명 :
- */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +15,8 @@ import com.nemew.blog.post.service.BoardService;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
-	@Autowired BoardDao dao;
+	@Autowired 
+	BoardDao dao;
 
 	//다중건 조회
 	@Override
@@ -37,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 	
-	
+	//게시물 등록
 	@Override
 	public boolean boardInsertPost(BoardModel vo) throws Exception {		
 		boolean result = true;
@@ -50,9 +44,11 @@ public class BoardServiceImpl implements BoardService {
 		return result; 
 	}
 	
+	//등록을 위한 max key번호 조회
 	@Override
 	public int maxIdNum() {
 		int result = dao.maxIdNum();
+		
 		return result;
 	}
 	

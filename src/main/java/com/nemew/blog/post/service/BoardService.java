@@ -1,13 +1,8 @@
 package com.nemew.blog.post.service;
-/**
- * @FileName : BoardService.java
- * @Project : MavenTest
- * @Date : 2019. 12. 10. 
- * @작성자 : 송현주
- * @변경이력 :
- * @프로그램 설명 :
- */
+
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import com.nemew.blog.post.model.BoardModel;
 import com.nemew.blog.post.model.Search;

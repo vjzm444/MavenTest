@@ -1,12 +1,5 @@
 package com.nemew.blog.post.model;
-/**
- * @FileName : BoardModel.java
- * @Project : MavenTest
- * @Date : 2019. 12. 10. 
- * @작성자 : 송현주
- * @변경이력 :
- * @프로그램 설명 :
- */
+
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -15,16 +8,33 @@ import org.apache.ibatis.type.Alias;
 public class BoardModel {
 	
 	public int id;
+	public String user_id;
 	public String title;
 	public String content;
 	public String phone;
 	public String reg_date;
+	public String img_url;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getImg_url() {
+		return img_url;
+	}
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
 	}
 	public String getTitle() {
 		return title;

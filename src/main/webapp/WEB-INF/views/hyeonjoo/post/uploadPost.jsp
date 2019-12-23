@@ -41,7 +41,7 @@
        <h1>글쓰기</h1>
 
         <form action="uploadProcess.do" method="post" name="contactForm" id="contactForm" novalidate>
-        
+             
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>아이디</label>
@@ -75,12 +75,32 @@
             </div>
           </div>
           
+          
+          
+          <!-- multiple --- -->
+           <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>이미지</label>
+              <input type="file"  class="form-control" name="fileup" id="fileup" accept="image/*"/>
+              
+              <div id="file_view_list" name="file_view_list"></div>
+              
+              <p class="help-block text-danger"></p>
+            </div>
+            
+            
           <br>
           <div id="success"></div>
           
           <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">등록</button>
+             <a class="btn btn-primary float-right" href="list.do">목록 &rarr;</a>
           </div>
+          
+          
+          
+      
+        
           
         </form>
       </div>

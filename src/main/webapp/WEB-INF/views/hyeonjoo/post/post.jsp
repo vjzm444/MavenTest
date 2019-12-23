@@ -29,7 +29,7 @@
             <h1>${title}</h1>
             <h2 class="subheading">Phone : ${phone}</h2>
             <span class="meta">Posted by
-              <a href="#">SongHJ</a>
+              <a href="#">${user_id}</a>
               on ${regDate}</span>
           </div>
         </div>
@@ -45,18 +45,15 @@
         
           <h2 class="section-heading">${title}</h2>
 
-          <p>${content}</p>
-
           <a href="#">
-            <img class="img-fluid" src="img/post-sample-image.jpg" alt="">
+            <img class="img-fluid" src="${img_url}" alt="">
           </a>
-          <span class="caption text-muted">이것은 상단 사진의 설명란입니다.</span>
-
+          
           <p>${content}</p>
           
           <p>Placeholder text by
-            <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
-            <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+            <a href="http://spaceipsum.com/">${user_id}</a>
+          </p>
         </div>
       </div>
     </div>

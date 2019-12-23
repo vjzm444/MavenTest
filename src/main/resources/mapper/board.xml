@@ -7,10 +7,13 @@
 
 	<resultMap id="resultGetBoard" type="com.nemew.blog.post.model.BoardModel">
 		<result property="id" column="ID" />
+		<result property="user_id" column="USER_ID" />
 		<result property="title" column="TITLE" />
 		<result property="content" column="CONTENT" />
 		<result property="phone" column="PHONE" />
 		<result property="reg_date" column="REG_DATE" />
+		<result property="img_url" column="IMG_URL" />
+		
 	</resultMap>
 
 	<select id="BoardList" resultMap="resultGetBoard">
@@ -30,19 +33,30 @@
 	</select>
 	
 	<select id="maxIdNum" resultType="int">
-			select max(id)+1 as topnum from board
+			select 
+			
+			ifnull(a.num,1) as topnum
+			
+			from (
+				select 
+				max(id)+1 num
+				from board
+			)a
+			
 	</select>
 	
 	
 	<insert id ="boardInsertPost">
 		insert into board (
-		id,title,content,phone,reg_date
+		id,user_id, title,content,phone,reg_date,img_url
 		) value (
 			#{id},
+			#{user_id},
 			#{title},
 			#{content},
 			#{phone},
-			#{reg_date}
+			#{reg_date},
+			#{img_url}
 		)
 	</insert>
 	
