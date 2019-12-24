@@ -39,8 +39,9 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	//전역변수 폴더경로
-	String urlPass = "hyeonjoo/post/";
+	//전역변수 
+	String urlPass = "hyeonjoo/post/";	//jsp폴더경로
+	String filePass = "C:/dev/SpringWorkspace/MavenTest/src/main/resources/static/";	//물리적파일 저장경로
 
 	// @GetMapping으로 해야지 jsp로 감....
 	/*
@@ -87,6 +88,41 @@ public class BoardController {
 		
 		BoardModel board = boardService.boardDatail(search);
 		
+		String count = "6";	//textarea에 표시할 defalut row
+		
+		String contentChk = board.getContent();
+		int lngChk = contentChk.length();
+		
+		//내용 글씨수 체크 후 row크기 조절
+		if(lngChk >= 160 && lngChk <= 200) {
+			System.out.println("160~200글자수");
+			count = "15";
+		}else if(lngChk >= 210 && lngChk <= 250) {
+			System.out.println("210~250글자수");
+			count = "21";
+		}
+		
+		String mobileUrl = "";
+		int degree = 0 ;	//사진이 없을 시 결과 디폴트 셋팅
+
+		//사진이 없을경우
+		if(board.getImg_url() == null || board.getImg_url().equals("")) {	
+			
+		}else {	//사진이 있을경우(모바일 혹은 pc에서 업로드함을 구분하기 위해 만듬)
+			String realUrl = filePass+board.getImg_url();
+			
+			int orientation = ImageUtil.getOrientation(realUrl);
+			degree = ImageUtil.getDegreeForOrientation(orientation);
+		}
+		
+		if(degree != 0){
+			mobileUrl = "1024";	//모바일에서 업로드한 사진이 있을 시 값
+		}else {
+			mobileUrl = "not Image";	//사진이 아예없음 OR 모바일에서 업로드 안했을때 이미지였을 경우
+		}
+		
+		//System.out.println("in java mobileUrl======"+mobileUrl);
+		
 		model.addAttribute("id", board.getId());
 		model.addAttribute("user_id", board.getUser_id());
 		model.addAttribute("title", board.getTitle());
@@ -94,6 +130,9 @@ public class BoardController {
 		model.addAttribute("phone", board.getPhone());
 		model.addAttribute("regDate", board.getReg_date());
 		model.addAttribute("img_url", board.getImg_url());
+		model.addAttribute("count", count);
+		
+		request.setAttribute("mobileUrl", mobileUrl);
 		
 		return urlPass+"post"; 
 	}
@@ -177,9 +216,7 @@ public class BoardController {
 	    List<HashMap> fileArrayList = new ArrayList<HashMap>();
 	    HashMap fileHashMap;
 
-	    //물리적경로 C:/dev/SpringWorkspace/MavenTest/src/main/resources/static\saveImg
-	    //String filePath = "C:/dev/cssWorkspace"; //파일 저장 경로, 설정파일로 따로 관리한다.
-	    String filePath = "C:/dev/SpringWorkspace/MavenTest/src/main/resources/static/saveImg"; //파일 저장 경로, 설정파일로 따로 관리한다.
+	    String filePath = filePass+"saveImg"; //파일 저장 경로, 설정파일로 따로 관리한다.
 		 
 	    File dir = new File(filePath); //파일 저장 경로 확인, 없으면 만든다.
 	    if (!dir.exists()) {

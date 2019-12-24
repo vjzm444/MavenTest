@@ -1,3 +1,5 @@
+
+
 $(function() {
 
   $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
@@ -23,11 +25,8 @@ $(function() {
 
       
     var user_id = document.contactForm.name.value;
-    var phone = document.contactForm.phone.value;
     var title = document.contactForm.title.value;
-    var message = document.contactForm.message.value;
-
-
+    
     var img_url;
     
     //파일처리 결과변수
@@ -39,12 +38,13 @@ $(function() {
     var formData = new FormData(); //ajax로 넘길 data
     var fileInput = document.getElementById("fileup"); //id로 파일 태그를 호출
     var files = fileInput.files; //업로드한 파일들의 정보를 넣는다.
-     
+    
+    
     for (var i = 0; i < files.length; i++) {
         formData.append('file-'+i, files[i]); //업로드한 파일을 하나하나 읽어서 FormData 안에 넣는다.
     }
     
-    //물리적경로 C:\dev\SpringWorkspace\MavenTest\src\main\resources\static\saveImg
+    //물리적경로는 java에서 설정
     var filePath = "saveImg/"; //파일 저장 경로
     var fileValue = $("#fileup").val().split("\\");
     var fileName = fileValue[fileValue.length-1]; // 파일명
@@ -54,7 +54,6 @@ $(function() {
     var statement = 'jpg/gif/png/jpeg/bmp';
     
     filePath = filePath+fileName;
-    
     
     if (statement.indexOf(resultSplit) != -1) {
     	console.log(resultSplit);
@@ -103,7 +102,6 @@ $(function() {
         }
     });
     
-    alert('결과는  ='+result);
     
     if(suc == result){
     	console.log('성공');
@@ -115,6 +113,7 @@ $(function() {
     	alert('뭔가이상함????????');
     }
 
+    
       //게시물 글짜 등록 시작~~~~~~~~~~~~~~~~
       $.ajax({
         url: "/uploadProcess.do",

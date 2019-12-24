@@ -70,7 +70,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>내용</label>
-              <textarea rows="5" class="form-control" placeholder="내용" id="message" name="message" required data-validation-required-message="내용을 입력해주십시오"></textarea>
+              <textarea rows="5" class="form-control" placeholder="250자까지 입력이 가능합니다" id="message" name="message" maxlength="250" required data-validation-required-message="내용을 입력해주십시오"></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
