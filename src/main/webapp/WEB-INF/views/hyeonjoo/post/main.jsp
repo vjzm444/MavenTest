@@ -7,7 +7,7 @@
 
 <html>
 	<head>
-		<title>Urban by TEMPLATED</title>
+		<title>SongHJ Blog - main Theme</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -45,7 +45,7 @@ p{
 				<ul class="links">
 					<li><a href="/">Home</a></li>
 					<li><a href="list.do">게시판</a></li>
-					<li><a href="elements.html">Elements</a></li>
+					<li><a href="youtube.do">YouTube</a></li>
 				</ul>
 			</nav>
 
@@ -170,7 +170,7 @@ p{
 					<ul class="icons">
 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Instagram</span></a></li>
 						<li><a href="#" class="icon fa-youtube"><span class="label">Snapchat</span></a></li>
 					</ul>
 					<p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>

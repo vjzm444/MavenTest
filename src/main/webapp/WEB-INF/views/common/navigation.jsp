@@ -27,14 +27,13 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
+       
+
           <li class="nav-item">
             <a class="nav-link" href="list.do" style= "font-family: 'Nanum Gothic', sans-serif;">게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="youtube.do">YouTube</a>
           </li>
         </ul>
       </div>

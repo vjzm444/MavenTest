@@ -270,6 +270,13 @@ public class BoardController {
 	    }
 	    return retVal;
 	}
+	
+	// 유튜브 리스트 메뉴이동
+	@GetMapping("/youtube.do")// URL 주소
+	public String youtube(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+	
+		return urlPass+"youTubeList"; 
+	}
 
 	
 	
