@@ -20,7 +20,13 @@
 		SELECT AA.* FROM (
 			SELECT ROW_NUMBER() OVER(ORDER BY id ) num, a.* FROM board A  
 		)AA 
-		order by reg_date desc
+		
+			<if test="keyword != null and keyword != '' ">
+					<![CDATA[ where user_id='vjzm44' ]]>
+			</if>
+			
+		order by reg_date, id desc
+		
 			<if test="keyword != null and keyword != '' ">
 				<![CDATA[ Limit 3 ]]>
 			</if>

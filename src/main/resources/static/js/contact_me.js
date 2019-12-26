@@ -26,6 +26,21 @@ $(function() {
       
     var user_id = document.contactForm.name.value;
     var title = document.contactForm.title.value;
+
+    var adminChk = document.contactForm.adminChk.value;
+    
+    if(adminChk == "Y"){
+    	//alert('admin');
+    }else{
+    	
+    	if(user_id == "vjzm44" ){
+        	alert('admin계정 아이디를 사용하실수없습니다.');
+	    	location.reload();
+	    	return
+    	}
+    	
+    }
+    
     
     var img_url;
     
@@ -97,12 +112,11 @@ $(function() {
         error: function(xhr,textStatus,error){
         	result = "N";
             console.log("textStatus: "+xhr.status+", error: "+error);
-            alert("예상치 못한 오류가 발생했습니다.");
             return false
         }
     });
     
-    
+    //이부분 안먹히는거같은디...일단파일처리임
     if(suc == result){
     	console.log('성공');
     }else if(suc != result){
@@ -144,7 +158,7 @@ $(function() {
           $('#success').html("<div class='alert alert-danger'>");
           $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
             .append("</button>");
-          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
+          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", 등록하는것에 실패하였습니다!"));
           $('#success > .alert-danger').append('</div>');
           //clear all fields
           $('#contactForm').trigger("reset");

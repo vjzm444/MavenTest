@@ -7,6 +7,7 @@
 <html>
 <head>
   <!-- Navigation -->
+ 
   <%@ include file="/WEB-INF/views/common/cssCommon.jsp" %>
   
   <title>SongHJ Blog - main Theme</title>
@@ -15,17 +16,20 @@
 
 <body>
 
+
+
   <!-- Navigation -->
   <%@ include file="/WEB-INF/views/common/navigation.jsp" %>
+			
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/about-bg.jpg')">s
+  <header class="masthead" style="background-image: url('img/about-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Post Page</h1>
+            <h1 align ="center">Post Page</h1>
             <span class="subheading"></span>
           </div>
         </div>
@@ -43,12 +47,12 @@
         
         <div class="post-preview">
           <a href="javascript:click(${list.id});">
-            <h2 class="post-title">
+            <h3>
              ${list.title}
-            </h2>
+            </h3>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">SongHJ</a>
+            <a href="#">${list.user_id}</a>
             on ${list.reg_date}</p>
         </div>
         <hr>
@@ -69,6 +73,7 @@
   <!-- Footer -->
   <%@ include file="/WEB-INF/views/common/footer.jsp" %>
   
+
 
 <script>
 

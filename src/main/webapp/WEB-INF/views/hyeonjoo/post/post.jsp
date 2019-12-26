@@ -5,6 +5,9 @@
 //String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 String mobileImg =  (String) request.getAttribute("mobileUrl"); 
 
+if(mobileImg.equals("1024"))
+	System.out.println("jsp 내 모바일용사진=============");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -42,13 +45,14 @@ String mobileImg =  (String) request.getAttribute("mobileUrl");
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+        
           <div class="post-heading">
-            <h1>${title}</h1>
-            <h2 class="subheading">Phone : ${phone}</h2>
-            <span class="meta">Posted by
-              <a href="#">${user_id}</a>
+            <h2 class="subheading">${title}</h2>
+            <span class="meta">Phone : ${phone} Posted by
+              ${user_id}
               on ${regDate}</span>
           </div>
+          
         </div>
       </div>
     </div>

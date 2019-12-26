@@ -27,7 +27,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h2>Upload Post!</h2>
-            <span class="subheading">글쓰기 페이지입니다.</span>
+            <span class="subheading">관리자용 글쓰기 페이지</span>
           </div>
         </div>
       </div>
@@ -38,14 +38,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-       <h2>글쓰기</h2>
+       <h2>Admin 글쓰기</h2>
 
         <form action="uploadProcess.do" method="post" name="contactForm" id="contactForm" novalidate>
              
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>아이디</label>
-              <input type="text" class="form-control" placeholder="아이디" id="name" name="name"  pattern="[A-Za-z0-9]*" required data-validation-required-message="아이디를 입력해주십시오">
+              <input type="text" class="form-control" placeholder="아이디" id="name" name="name"  value="vjzm44"  pattern="[A-Za-z0-9]*" required data-validation-required-message="아이디를 입력해주십시오">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -98,8 +98,8 @@
           </div>
           
           
-          <input type="hidden" id="adminChk" name="adminChk" value="N" />
-      
+          
+      	<input type="hidden" id="adminChk" name="adminChk" value="Y" />
         
           
         </form>

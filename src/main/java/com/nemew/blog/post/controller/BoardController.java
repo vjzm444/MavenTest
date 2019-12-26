@@ -74,7 +74,7 @@ public class BoardController {
 		System.out.println("result size==== "+board.size());
 		
 		request.setAttribute("data", board);
-		return urlPass+"info"; 
+		return urlPass+"main"; 
 	}
 	
 	
@@ -151,13 +151,21 @@ public class BoardController {
 		return urlPass+"allList"; 
 	}
 	
-	//글쓰기 화면 이동
-	@GetMapping("/uploadPage.do")// URL 주소
+	//사용자 글쓰기 화면 이동
+	@GetMapping("/uploadPage.do")
 	public String uploadPage(HttpServletRequest request,HttpServletResponse response) throws Throwable {			
 		
 		return urlPass+"uploadPost"; 
 		//return urlPass+"fileUpTest"; //파일업로드 테스트화면
 	}
+	
+	
+	//Admin 글쓰기 화면 이동
+	@GetMapping("/uploadPageAdmin.do")
+	public String uploadPageAdmin(HttpServletRequest request,HttpServletResponse response) throws Throwable {			
+		return urlPass+"uploadPostAdmin"; 
+	}
+		
 	
 	 //id값 가져오기
 	public int idNum() {
