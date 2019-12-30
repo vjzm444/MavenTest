@@ -168,6 +168,7 @@ function uploadImageByImgur(form, callback) {
             xhr.upload.addEventListener("progress", function(evt){// 업로드상태이벤트리스너등록
                 if (evt.lengthComputable) {              
                     console.log("업로드진행률:"+parseInt( (evt.loaded / evt.total * 100), 10)+"%");
+                    $("#file_view_list").html(parseInt( (evt.loaded / evt.total * 100), 10)+"%"); //리스트를 화면에 보여줌
                 }
             }, false);
             return xhr;
