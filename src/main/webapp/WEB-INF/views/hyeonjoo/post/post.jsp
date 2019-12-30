@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%
 //현재 도메인url을 부름
 //String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
-String mobileImg =  (String) request.getAttribute("mobileUrl"); 
+int mobileImg =  (int) request.getAttribute("mobileUrl"); 
+//int mobileImg = Integer.parseInt(request.getParameter("mobileUrl"));
 
-if(mobileImg.equals("1024"))
+if(mobileImg == 1024 )
 	System.out.println("jsp 내 모바일용사진=============");
 
 %>
@@ -118,7 +120,7 @@ if(mobileImg.equals("1024"))
 
   <!-- Footer -->
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
+   
 <script>
 	//이미지 자동회전 이슈 해결용
 	$("#testimg").load(function(){

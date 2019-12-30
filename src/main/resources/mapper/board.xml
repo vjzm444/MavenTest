@@ -25,7 +25,7 @@
 					<![CDATA[ where user_id='vjzm44' ]]>
 			</if>
 			
-		order by reg_date, id desc
+		order by id desc
 		
 			<if test="keyword != null and keyword != '' ">
 				<![CDATA[ Limit 3 ]]>

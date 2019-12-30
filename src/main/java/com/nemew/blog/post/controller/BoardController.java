@@ -42,7 +42,10 @@ public class BoardController {
 	//전역변수 
 	String urlPass = "hyeonjoo/post/";	//jsp폴더경로
 	String filePass = "C:/dev/SpringWorkspace/MavenTest/src/main/resources/static/";	//물리적파일 저장경로
-
+	//String filePass = "C:/dev/cssWorkspace/";
+	
+	
+	
 	// @GetMapping으로 해야지 jsp로 감....
 	/*
 	@ResponseBody    
@@ -51,6 +54,13 @@ public class BoardController {
 		return "Hellow World!"; // 글씨가 리턴된다
 	}
 	*/
+	
+	 //외부이미지 서버 테스트
+	@GetMapping("/test")// URL 주소
+	public String test(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+		
+		return urlPass+"test2"; 
+	}
 	
 	//ajax 버젼 다중건 데이터 리턴용
 	@ResponseBody    
@@ -102,9 +112,9 @@ public class BoardController {
 			count = "21";
 		}
 		
-		String mobileUrl = "";
+		int mobileUrl = 0;
 		int degree = 0 ;	//사진이 없을 시 결과 디폴트 셋팅
-
+/*
 		//사진이 없을경우
 		if(board.getImg_url() == null || board.getImg_url().equals("")) {	
 			
@@ -114,11 +124,11 @@ public class BoardController {
 			int orientation = ImageUtil.getOrientation(realUrl);
 			degree = ImageUtil.getDegreeForOrientation(orientation);
 		}
-		
+	*/	
 		if(degree != 0){
-			mobileUrl = "1024";	//모바일에서 업로드한 사진이 있을 시 값
+			mobileUrl = 1024;	//모바일에서 업로드한 사진이 있을 시 값
 		}else {
-			mobileUrl = "not Image";	//사진이 아예없음 OR 모바일에서 업로드 안했을때 이미지였을 경우
+			mobileUrl = 1022;	//사진이 아예없음 OR 모바일에서 업로드 안했을때 이미지였을 경우
 		}
 		
 		//System.out.println("in java mobileUrl======"+mobileUrl);
@@ -216,7 +226,10 @@ public class BoardController {
 	}
 	
 	
-	//물리적 파일등록 처리
+	
+	
+	//물리적 파일등록 처리 
+	//20119-12-30 송현주 : 외부이미지서버를 연동했기에 물리적 파일등록은 이제 안씀
 	@ResponseBody
 	@RequestMapping(value = "/test/fileSave.do") 
 	public Object fileSave(MultipartHttpServletRequest multipartRequest) {
@@ -270,6 +283,8 @@ public class BoardController {
 	    }
 	    return retVal;
 	}
+	
+	
 	
 	// 유튜브 리스트 메뉴이동
 	@GetMapping("/youtube.do")// URL 주소
