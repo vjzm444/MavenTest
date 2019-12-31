@@ -1,5 +1,12 @@
 package com.nemew.blog.post.controller;
-
+/**
+ * @FileName : BoardController.java
+ * @Project : MavenTest
+ * @Date : 2019. 12. 31. 
+ * @작성자 : song
+ * @변경이력 :
+ * @프로그램 설명 : 전체적인 컨트롤러
+ */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,12 +28,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.nemew.blog.post.dao.BoardDao;
 import com.nemew.blog.post.model.BoardModel;
+import com.nemew.blog.post.model.Pagination;
 import com.nemew.blog.post.model.Search;
 import com.nemew.blog.post.service.BoardService;
 
@@ -67,9 +76,9 @@ public class BoardController {
 	@RequestMapping(value="/getList/boardList.do", method = RequestMethod.GET ) // URL 주소
 	public List<BoardModel> selectBoardList() throws Throwable {
 		String allList	= "";
-		Search search = new Search();
-		search.setKeyword(allList);
-		return boardService.BoardList(search);
+		BoardModel boardVO = new BoardModel();
+		boardVO.setKeyword(allList);
+		return boardService.BoardList(boardVO);
 	}
 	
 
@@ -78,17 +87,23 @@ public class BoardController {
 	public String main(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
 		//데이터 3개만 조회
-		Search search = new Search();
-		search.setKeyword("Y");
-		List<BoardModel> board = boardService.BoardList(search);
+		BoardModel boardVO = new BoardModel();
+		boardVO.setKeyword("Y");
+		List<BoardModel> board = boardService.BoardListAdmin(boardVO);
 		System.out.println("result size==== "+board.size());
 		
 		request.setAttribute("data", board);
 		return urlPass+"main"; 
 	}
 	
-	
-	 //게시물 상세 1건 정보조회
+	// 유튜브 리스트 메뉴이동
+	@GetMapping("/youtube.do")// URL 주소
+	public String youtube(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+		
+		return urlPass+"youTubeList"; 
+	}
+
+	//게시물 상세 1건 정보조회
 	@GetMapping("/post.do")// URL 주소
 	public String post(HttpServletRequest request, HttpServletResponse response, Model model) throws Throwable {
 		
@@ -149,15 +164,35 @@ public class BoardController {
 	
 	//게시판 클릭시 전체리스트 출력
 	@GetMapping("/list.do")// URL 주소
-	public String list(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+	public String list(HttpServletRequest request,HttpServletResponse response,
+			@RequestParam(defaultValue="1") int curPage, Model model) throws Throwable {
 	
-		String allList	= "";
-		Search search = new Search();
-		search.setKeyword(allList);
+		BoardModel boardVO = new BoardModel();
 		
-		List<BoardModel> board = boardService.BoardList(search);
+		int listCnt  = boardService.BoardListCnt();
+		
+		Pagination pagination = new Pagination(listCnt, curPage);
+
+	    int endIndex = pagination.getPageSize();
+
+	    if(curPage != 1) {
+	    	endIndex = pagination.getPageSize()*2;
+	    }	
+		
+	    System.out.println("getStartIndex cnt ="+pagination.getStartIndex());
+	    System.out.println("endIndex cnt ="+endIndex);
+	    
+	    boardVO.setStartIndex(pagination.getStartIndex());
+	    boardVO.setCntPerPage(endIndex);
+	        
+	    List<BoardModel> board = boardService.BoardList(boardVO);
 			
-		request.setAttribute("data", board);
+		//request.setAttribute("data", board);
+		
+		model.addAttribute("data", board);
+	    model.addAttribute("listCnt", listCnt);
+	    model.addAttribute("pagination", pagination);
+	        
 		return urlPass+"allList"; 
 	}
 	
@@ -230,6 +265,7 @@ public class BoardController {
 	
 	//물리적 파일등록 처리 
 	//20119-12-30 송현주 : 외부이미지서버를 연동했기에 물리적 파일등록은 이제 안씀
+	/*
 	@ResponseBody
 	@RequestMapping(value = "/test/fileSave.do") 
 	public Object fileSave(MultipartHttpServletRequest multipartRequest) {
@@ -283,15 +319,9 @@ public class BoardController {
 	    }
 	    return retVal;
 	}
+	*/
 	
 	
-	
-	// 유튜브 리스트 메뉴이동
-	@GetMapping("/youtube.do")// URL 주소
-	public String youtube(HttpServletRequest request,HttpServletResponse response) throws Throwable {
-	
-		return urlPass+"youTubeList"; 
-	}
 
 	
 	

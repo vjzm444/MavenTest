@@ -13,45 +13,64 @@
 		<result property="phone" column="PHONE" />
 		<result property="reg_date" column="REG_DATE" />
 		<result property="img_url" column="IMG_URL" />
-		
 	</resultMap>
-
-	<select id="BoardList" resultMap="resultGetBoard">
+	
+	<!--메인페이지 조회-->
+	<select id="BoardListAdmin" resultMap="resultGetBoard">
 		SELECT AA.* FROM (
 			SELECT ROW_NUMBER() OVER(ORDER BY id ) num, a.* FROM board A  
 		)AA 
-		
+		where 1=1
 			<if test="keyword != null and keyword != '' ">
-					<![CDATA[ where user_id='vjzm44' ]]>
+					<![CDATA[ and user_id='vjzm44' ]]>
 			</if>
 			
 		order by id desc
-		
-			<if test="keyword != null and keyword != '' ">
-				<![CDATA[ Limit 3 ]]>
-			</if>
+		 Limit 3 
 		
 	</select>
 	
+	
+	<!-- 전체게시물 조회 (페이징처리)-->
+	<select id="BoardList" resultMap="resultGetBoard">
+		SELECT AA.* FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY id desc) num, a.* FROM board A  
+		)AA 
+		where 1=1
+		<![CDATA[ 
+			and num > #{startIndex}
+        	and num <= #{cntPerPage}
+		]]>
+		
+	</select>
+	
+
+	<!-- 전체게시물 갯수 조회 	-->
+	<select id="BoardListCnt" resultType="int">
+		SELECT count(*) FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY id ) num, a.* FROM board A  
+		)AA 
+	</select>
+	
+	
+	<!-- 상세게시물 조회 -->
 	<select id="boardDatail" resultType="com.nemew.blog.post.model.BoardModel">
 			select * from board 
 			where id = #{keyword}
 	</select>
 	
+	<!-- max number check -->
 	<select id="maxIdNum" resultType="int">
 			select 
-			
 			ifnull(a.num,1) as topnum
-			
 			from (
 				select 
 				max(id)+1 num
 				from board
 			)a
-			
 	</select>
 	
-	
+	<!-- 전체게시물 갯수 조회 	-->
 	<insert id ="boardInsertPost">
 		insert into board (
 		id,user_id, title,content,phone,reg_date,img_url

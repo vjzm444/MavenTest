@@ -1,5 +1,12 @@
 package com.nemew.blog.post.model;
-
+/**
+ * @FileName : BoardModel.java
+ * @Project : MavenTest
+ * @Date : 2019. 12. 24. 
+ * @작성자 : song
+ * @변경이력 : 
+ * @프로그램 설명 : 매핑되는 db컬럼 및 페이징처리
+ */
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -15,6 +22,22 @@ public class BoardModel {
 	public String reg_date;
 	public String img_url;
 	
+	//페이징처리
+	public int startIndex;
+	public int cntPerPage;
+	
+	public String keyword;	//조회 할 키워드
+	
+	
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}	
+	
 	public int getId() {
 		return id;
 	}
@@ -22,8 +45,22 @@ public class BoardModel {
 		this.id = id;
 	}
 	
-	
-	
+	public int getStartIndex() {
+		return startIndex;
+	}
+
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+
+	public int getCntPerPage() {
+		return cntPerPage;
+	}
+
+	public void setCntPerPage(int cntPerPage) {
+		this.cntPerPage = cntPerPage;
+	}
+
 	public String getUser_id() {
 		return user_id;
 	}

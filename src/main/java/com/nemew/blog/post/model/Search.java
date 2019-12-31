@@ -1,5 +1,12 @@
 package com.nemew.blog.post.model;
-
+/**
+ * @FileName : Search.java
+ * @Project : MavenTest
+ * @Date : 2019. 12. 24. 
+ * @작성자 : song
+ * @변경이력 : 20191231 송현주: 현재는 안씀...근데 나중에 검색기능 추가할때는 써야지...
+ * @프로그램 설명 : 검색용 bean용으로 만들어 놓음
+ */
 import org.apache.ibatis.type.Alias;
 
 @Alias("search")

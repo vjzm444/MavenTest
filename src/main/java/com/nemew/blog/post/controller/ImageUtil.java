@@ -16,7 +16,7 @@ import com.drew.metadata.exif.ExifIFD0Directory;
   * @Project : MavenTest
   * @Date : 2019. 12. 24. 
   * @작성자 : song
-  * @변경이력 :
+  * @변경이력 : 20191231 송현주 : 외부이미지서버를 연동하였기 때문에 이제 사용안함
   * @프로그램 설명 : 모바일에서 사진 업로드후 조회 시 사진설정땜에 이미지가 가로로 출력되는 이슈를 해결하기 위해 긁어옴
   */
 
