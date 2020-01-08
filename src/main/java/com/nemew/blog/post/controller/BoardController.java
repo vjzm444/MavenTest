@@ -204,7 +204,7 @@ public class BoardController {
 		//return urlPass+"fileUpTest"; //파일업로드 테스트화면
 	}
 	
-	
+	//test
 	//Admin 글쓰기 화면 이동
 	@GetMapping("/uploadPageAdmin.do")
 	public String uploadPageAdmin(HttpServletRequest request,HttpServletResponse response) throws Throwable {			
