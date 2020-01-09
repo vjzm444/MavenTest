@@ -70,7 +70,7 @@
 			)a
 	</select>
 	
-	<!-- 전체게시물 갯수 조회 	-->
+	<!-- 게시물 업로드 	-->
 	<insert id ="boardInsertPost">
 		insert into board (
 		id,user_id, title,content,phone,reg_date,img_url
