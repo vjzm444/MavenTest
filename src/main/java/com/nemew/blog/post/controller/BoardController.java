@@ -17,6 +17,8 @@ import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpRequest;
@@ -71,16 +73,77 @@ public class BoardController {
 		return urlPass+"test2"; 
 	}
 	
+	 //외부이미지 서버 테스트
+		@GetMapping("/listTest")// URL 주소
+		public String test2(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+			
+			return "test/list"; 
+		}
+		
 	//ajax 버젼 다중건 데이터 리턴용
 	@ResponseBody    
 	@RequestMapping(value="/getList/boardList.do", method = RequestMethod.GET ) // URL 주소
-	public List<BoardModel> selectBoardList() throws Throwable {
-		String allList	= "";
+	public BoardModel selectBoardList() throws Throwable {
+		
+	
+		String allList	= "good";
 		BoardModel boardVO = new BoardModel();
 		boardVO.setKeyword(allList);
-		return boardService.BoardList(boardVO);
+		return boardVO;
 	}
 	
+	
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//ajax 버젼 다중건 데이터 리턴용
+	@ResponseBody    
+	@RequestMapping(value="/getList/boardList3.do", method = RequestMethod.GET ) // URL 주소
+	public JSONObject selectBoardList3() throws Throwable {
+		
+		JSONObject data1 = new JSONObject();
+		data1.put("weather", "cloud");
+		data1.put("date", "2021-04-08");
+		
+		JSONObject data2 = new JSONObject();
+		data2.put("weather", "very cloud");
+		data2.put("date", "2021-04-07");
+		
+		JSONObject data3 = new JSONObject();
+		data3.put("weather", "not cloud");
+		data3.put("date", "2021-04-06");
+		
+		JSONArray arr = new JSONArray();
+		arr.add(data1);//0번인덱스
+		arr.add(data2);//1번인덱스
+		arr.add(data3);//2번인덱스
+		
+		//최종적으로 univ오브젝트에 JSON배열 저장
+		JSONObject univ = new JSONObject();
+		univ.put("univ", arr);
+		
+		return univ;
+		
+
+	}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	//ajax 버젼 다중건 데이터 리턴용
+		@ResponseBody    
+		@RequestMapping(value="/getList/boardList2.do", method = RequestMethod.GET ) // URL 주소
+		public Map selectBoardList2() throws Throwable {
+			
+		List aa = new ArrayList<String>();
+		aa.add("aaa");
+		aa.add("bbb");
+		
+		Map result = new HashMap<String, Object>();
+		result.put("weather", aa);
+		
+		return result;
+
+		}
 
 	 //메인화면 게시물을3개만 출력
 	@GetMapping("/")// URL 주소

@@ -8,17 +8,17 @@
 //ajax 버젼
 $(function() {
 	$.ajax({
-		url : '/getList/boardList.do',
+		url : '/getList/boardList3.do',
 		type: 'GET',
 		//data : params,
 		success : function(result) {
+			
+			for(var i in result.univ) {
+				console.log('weather = '+result.univ[i].weather);
+				console.log('date = '+result.univ[i].date);
 
-			for(var i in result) {
-				console.log(result[i].id);
-				console.log(result[i].title);
-				console.log(result[i].content);
-				console.log(result[i].phone);
-				console.log(result[i].regdate);
+
+		        $("#fate").append(result.univ[i].date+"의 날씨입니다 : "+result.univ[i].weather+"<br>");
 			}
 
 		},
@@ -30,6 +30,35 @@ $(function() {
 	});
 });
 
+
+//현제의 날씨를 api를 써서 가져온다.
+var city ="Korea";
+var imgURL ="";
+var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Korea&appid=66c826612d6d725d049ec394b11ea2e9";
+$.ajax({
+    url: apiURI,
+    dataType: "json",
+    type: "GET",
+    async: "false",
+    success: function(resp) {
+        console.log(resp);
+        console.log("현재온도 : "+ (resp.main.temp- 15) );
+        console.log("현재습도 : "+ resp.main.humidity);
+        console.log("날씨 : "+ resp.weather[0].main );
+        console.log("상세날씨설명 : "+ resp.weather[0].description );
+        console.log("날씨 이미지 : "+ resp.weather[0].icon );
+        console.log("바람   : "+ resp.wind.speed );
+        console.log("나라   : "+ resp.sys.country );
+        console.log("도시이름  : "+ resp.name );
+        console.log("구름  : "+ (resp.clouds.all) +"%" ); 
+
+        $("#result1").text("오늘의 구름 퍼센트입니다 : "+(resp.clouds.all) +"%");
+                        
+    }, error: function(error){
+		alert('error!');
+    }
+})
+
 </script>
     
     
@@ -39,65 +68,20 @@ $(function() {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>현주 블로그</title>
+	<title>현주 </title>
 
 
-<style>
-            <!--
-            body,p,ol,ul,td
-            {
-                font-family: 굴림;
-                font-size: 12px;
-            }
-
-            a:link { size:9px;color:#000000;text-decoration: none; line-height: 12px}
-            a:visited { size:9px;color:#555555;text-decoration: none; line-height: 12px}
-            a:hover { color:#ff9900;text-decoration: none; line-height: 12px}
-
-            .style1 {
-                color: #6b902a;
-                font-weight: bold;
-            }
-            .style2 {
-                color: #666666
-            }
-            .style3 {
-                color: #3b5d00;
-                font-weight: bold;
-            }
-            -->
-</style>
         
 </head>
 
 <body  bgcolor="#FFFFFF" topmargin=0 leftmargin=0 marginheight=0 marginwidth=0>
-<table  cellpadding=1 cellspacing=1 >
+
+ <div id="fate" name="fate"></div>
+ <br>
+ <div id="result1" name="result1"></div>
 
 
-	<tr>
-		<th align=center>글번호</th>
-		<th align=center>제목</th>
-		<th align=center>내용</th>
-		<th align=center>작성일</th>
-	</tr>
-		
-	<c:forEach var="list" items="${data}">
-		<tr>
-			<td align=left>${list.id}</td>
-            <td align=left>${list.title}</td>
-            <td align=left>${list.content}</td>
-            <td align=left>${list.phone}</td>
-		</tr>
-    </c:forEach>
 	
-	
-</table>
-<br>
-	<tr>
-		<td><input type="text" style="ime-mode: active;">한글디폴트<br></td>
-	</tr>
-	
-
 </body>
 
 
