@@ -28,6 +28,11 @@ public class BoardModel {
 	
 	public String keyword;	//조회 할 키워드
 	
+	public String temp; //온도
+	public String state; //날씨상태
+	public String cloud; //구름상태
+
+	public String dataYmd; //날짜
 	
 	
 	public String getKeyword() {
@@ -96,6 +101,38 @@ public class BoardModel {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+
+	public String getTemp() {
+		return temp;
+	}
+
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCloud() {
+		return cloud;
+	}
+
+	public void setCloud(String cloud) {
+		this.cloud = cloud;
+	}
+
+	public String getDataYmd() {
+		return dataYmd;
+	}
+
+	public void setDataYmd(String dataYmd) {
+		this.dataYmd = dataYmd;
 	}
 
 	
