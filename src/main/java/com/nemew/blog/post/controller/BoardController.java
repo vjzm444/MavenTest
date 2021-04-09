@@ -28,13 +28,18 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.nemew.blog.post.dao.BoardDao;
 import com.nemew.blog.post.model.BoardModel;
 import com.nemew.blog.post.model.Pagination;
@@ -42,6 +47,10 @@ import com.nemew.blog.post.model.Search;
 import com.nemew.blog.post.service.BoardService;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 
 @Controller("BoardController")
@@ -73,79 +82,88 @@ public class BoardController {
 		return urlPass+"test2"; 
 	}
 	
-	 //외부이미지 서버 테스트
-		@GetMapping("/listTest")// URL 주소
-		public String test2(HttpServletRequest request,HttpServletResponse response) throws Throwable {
-			
-			return "test/list"; 
-		}
+	// 외부이미지 서버 테스트
+	@GetMapping("/listTest") // URL 주소
+	public String listTest(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
+		return "/test/list";
+	}
+	/*	
 	//ajax 버젼 다중건 데이터 리턴용
 	@ResponseBody    
 	@RequestMapping(value="/getList/boardList.do", method = RequestMethod.GET ) // URL 주소
-	public BoardModel selectBoardList() throws Throwable {
-		
-	
-		String allList	= "good";
+	public List<BoardModel> selectBoardList() throws Throwable {
+		String allList	= "";
 		BoardModel boardVO = new BoardModel();
 		boardVO.setKeyword(allList);
-		return boardVO;
+		return boardService.BoardList(boardVO);
 	}
+	*/
 	
-	
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//ajax 버젼 다중건 데이터 리턴용
-	@ResponseBody    
-	@RequestMapping(value="/getList/boardList3.do", method = RequestMethod.GET ) // URL 주소
-	public JSONObject selectBoardList3() throws Throwable {
-		
-		JSONObject data1 = new JSONObject();
-		data1.put("weather", "cloud");
-		data1.put("date", "2021-04-08");
-		
-		JSONObject data2 = new JSONObject();
-		data2.put("weather", "very cloud");
-		data2.put("date", "2021-04-07");
-		
-		JSONObject data3 = new JSONObject();
-		data3.put("weather", "not cloud");
-		data3.put("date", "2021-04-06");
-		
-		JSONArray arr = new JSONArray();
-		arr.add(data1);//0번인덱스
-		arr.add(data2);//1번인덱스
-		arr.add(data3);//2번인덱스
-		
-		//최종적으로 univ오브젝트에 JSON배열 저장
-		JSONObject univ = new JSONObject();
-		univ.put("univ", arr);
-		
-		return univ;
-		
+	// ajax 버젼 다중건 데이터 리턴용
+	@RequestMapping(value = "/getList/boardList2.do", method = RequestMethod.GET) // URL 주소
+	@ResponseBody
+	public Map selectBoardList2() throws Throwable {
+		BoardModel boardVO = new BoardModel();
 
-	}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	//ajax 버젼 다중건 데이터 리턴용
-		@ResponseBody    
-		@RequestMapping(value="/getList/boardList2.do", method = RequestMethod.GET ) // URL 주소
-		public Map selectBoardList2() throws Throwable {
-			
-		List aa = new ArrayList<String>();
-		aa.add("aaa");
-		aa.add("bbb");
-		
-		Map result = new HashMap<String, Object>();
-		result.put("weather", aa);
-		
-		return result;
+		ObjectMapper mapper = new ObjectMapper(); 
+		String jsonList="";
 
+		List<BoardModel> mv = boardService.BoardListAdmin(boardVO);		
+		jsonList = mapper.writeValueAsString(mv);
+
+		
+		System.out.println("mv size ===" + mv.size());
+
+		
+		for(int i=0;i<mv.size();i++){
+			System.out.println("mv ==="+mv.get(i));
+				
 		}
+		
+		System.out.println("jsonList ==="+jsonList);
+		
+		Map result = new HashMap();
+		result.put("items",jsonList);
+		//return boardService.BoardList(boardVO);
+		return result; 
+	}
 
-	 //메인화면 게시물을3개만 출력
+	
+	// restful api 날씨정보
+	@RequestMapping(value = "/getList/boardList3.do", method = RequestMethod.GET) // URL 주소
+	@ResponseBody
+	public String selectBoardList3(HttpServletResponse response) throws Throwable {
+		response.setHeader("Content-Type", "application/json");
+		BoardModel boardVO = new BoardModel();
+		List<BoardModel> placeList = boardService.WeatherList(boardVO);	 //db에서 날씨정보를 읽어온다
+		
+		Gson gson = new Gson();
+		String jsonPlace = gson.toJson(placeList);
+
+		return jsonPlace; //json형식으로 반환한다.
+	}
+	
+	//insert 후 결과값을 리턴해준다
+	@PostMapping("/formInsert.do") 
+	public @ResponseBody Map method(@RequestParam Map<String, Object> param, HttpServletRequest request, BoardModel defaultVO) {
+		
+		boolean result = boardService.method(param);
+		
+		Map resultMap = new HashMap();
+		
+		if(result)
+		resultMap.put("result","ok");
+		else
+		resultMap.put("result","false");
+			
+		return resultMap;
+		
+	}
+
+	
+
+	//메인화면 게시물을3개만 출력
 	@GetMapping("/")// URL 주소
 	public String main(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
@@ -335,7 +353,6 @@ public class BoardController {
 	 
 	    List<HashMap> fileArrayList = new ArrayList<HashMap>();
 	    HashMap fileHashMap;
-
 	    String filePath = filePass+"saveImg"; //파일 저장 경로, 설정파일로 따로 관리한다.
 		 
 	    File dir = new File(filePath); //파일 저장 경로 확인, 없으면 만든다.

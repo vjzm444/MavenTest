@@ -8,6 +8,7 @@ package com.nemew.blog.post.dao;
  * @프로그램 설명 : db에 매핑되는 dao
  */
 import java.util.List;
+import java.util.Map;
 
 import com.nemew.blog.post.model.BoardModel;
 import com.nemew.blog.post.model.Search;
@@ -17,6 +18,11 @@ public interface BoardDao {
 	
 	//게시판 조회
 	List<BoardModel> BoardList(BoardModel boardVO);
+	
+	//날씨조회
+	List<BoardModel> WeatherList(BoardModel boardVO);
+	//날씨 등록
+	public boolean insertWeatherInfo(Map<String, Object> map);
 	
 	//메인페이지 3건 조회
 	List<BoardModel> BoardListAdmin(BoardModel boardVO);

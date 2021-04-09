@@ -15,6 +15,14 @@
 		<result property="img_url" column="IMG_URL" />
 	</resultMap>
 	
+	<resultMap id="resultGetWeather" type="com.nemew.blog.post.model.BoardModel">
+		<result property="id" column="ID" />
+		<result property="temp" column="TEMP" />
+		<result property="state" column="STATE" />
+		<result property="cloud" column="CLOUD" />
+		<result property="dataYmd" column="DATAYMD" />
+	</resultMap>
+	
 	<!--메인페이지 조회-->
 	<select id="BoardListAdmin" resultMap="resultGetBoard">
 		SELECT AA.* FROM (
@@ -30,7 +38,19 @@
 		
 	</select>
 	
+	<!--날씨 조회-->
+	<select id="WeatherList" resultMap="resultGetWeather">
+		select * from weather
+		order by dataYmd desc, id desc
+		
+	</select>
 	
+	<!--실시간 날씨 저장-->
+	<insert id="insertWeatherInfo"> 
+	INSERT INTO weather ( temp,state,cloud ) values ( #{temp}, #{state}, #{cloud} ); 
+	</insert>
+
+
 	<!-- 전체게시물 조회 (페이징처리)-->
 	<select id="BoardList" resultMap="resultGetBoard">
 		SELECT AA.* FROM (

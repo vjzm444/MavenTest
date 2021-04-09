@@ -8,6 +8,7 @@ package com.nemew.blog.post.service;
  * @프로그램 설명 : 스프링의 서비스 기반
  */
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,12 @@ public interface BoardService {
 	//다중건 조회
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception;
 	
+	//날씨조회
+	public List<BoardModel> WeatherList(BoardModel boardVO) throws Exception;
+	
+	//날씨를 등록
+	public boolean method(Map<String, Object> map);
+
 	//메인페이지 3건
 	public List<BoardModel> BoardListAdmin(BoardModel boardVO) throws Exception;
 		

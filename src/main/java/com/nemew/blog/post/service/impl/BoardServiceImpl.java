@@ -8,6 +8,7 @@ package com.nemew.blog.post.service.impl;
  * @프로그램 설명 : 스프링의 서비스임풀 기반
  */
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.ibatis.session.SqlSession;
@@ -30,6 +31,20 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception{
 		return dao.BoardList(boardVO);
 	}
+	
+	//날씨정보를조회한다
+	@Override
+	public List<BoardModel> WeatherList(BoardModel boardVO) throws Exception{
+		return dao.WeatherList(boardVO);
+	}
+	//날씨를 등록한다
+	public boolean method(Map<String, Object> map){
+		dao.insertWeatherInfo(map);
+		boolean result =true;
+		return result;
+	}
+	
+	
 	
 	//메인페이지 3건
 	@Override
